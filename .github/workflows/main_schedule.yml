@@ -1,0 +1,14 @@
+name: Reponitor workflow
+on:
+  schedule:
+    - cron: '0 1 * * *' #Every day at 01:00 AM UTC
+jobs:
+  run_reponitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Reponitor Python Workload
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          SWH_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python reponitor.py
